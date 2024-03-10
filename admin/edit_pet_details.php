@@ -24,10 +24,10 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
         $row = $result->fetch_assoc();
 
         // Insert the data into 'not_found_pets' table
-        $sql_insert = "INSERT INTO not_found_pets (pet_name, lost_date, details, photo, pet_type) 
-                        VALUES (?, ?, ?, ?, ?)";
+        $sql_insert = "INSERT INTO not_found_pets (pet_name, lost_date, details, photo, pet_type, pet_img) 
+                        VALUES (?, ?, ?, ?, ?, ?)";
         $stmt_insert = $conn->prepare($sql_insert);
-        $stmt_insert->bind_param("sssss", $row['pet_name'], $row['lost_date'], $row['pet_details'], $row['pet_photo'], $row['pet_type']);
+        $stmt_insert->bind_param("ssssss", $row['pet_name'], $row['lost_date'], $row['pet_details'], $row['pet_photo'], $row['pet_type'], $row['pet_img']);
 
         $stmt_insert->execute();
 
@@ -44,7 +44,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
     $pet_details = $_POST['pet_details'];
     $lost_date = $_POST['lost_date'];
     $address = $_POST['address'];
-    // You need to handle image uploads separately if you're allowing users to update images.
 
     // Update the record in the database
     $sql = "UPDATE add_pet SET owner_name=?, pet_name=?, pet_type=?, pet_details=?, lost_date=?, address=? WHERE id=?";
@@ -74,6 +73,7 @@ $conn->close();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -83,6 +83,7 @@ $conn->close();
             display: flex;
             justify-content: space-between;
         }
+
         .sidebar {
             float: left;
             width: 20%;
@@ -90,18 +91,22 @@ $conn->close();
             background-color: #f2f2f2;
             padding: 20px;
         }
+
         .content {
             flex-basis: 80%;
             padding: 20px;
         }
+
         form {
             max-width: 500px;
             margin: auto;
         }
+
         label {
             display: block;
             margin-bottom: 5px;
         }
+
         input[type="text"],
         input[type="date"],
         textarea {
@@ -112,10 +117,12 @@ $conn->close();
             border-radius: 4px;
             box-sizing: border-box;
         }
+
         textarea {
             resize: vertical;
             height: 100px;
         }
+
         input[type="submit"] {
             background-color: #4CAF50;
             color: white;
@@ -125,15 +132,17 @@ $conn->close();
             cursor: pointer;
             float: right;
         }
+
         input[type="submit"]:hover {
             background-color: #45a049;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="sidebar">
-            <?php include('C:/xampp/htdocs/bc/glbl/admin_sidebar.php');?>
+            <?php include('C:/xampp/htdocs/bc/glbl/admin_sidebar.php'); ?>
         </div>
         <div class="content">
             <h1>Edit Pet Details</h1>
@@ -156,14 +165,15 @@ $conn->close();
 
                 <label for="address">Address:</label>
                 <input type="text" id="address" name="address" value="<?php echo $row['address']; ?>">
-                
+
                 <!-- Display pet photo -->
                 <label for="pet_photo">Pet Photo:</label>
                 <img src="data:image/jpeg;base64,<?php echo base64_encode($row['pet_photo']); ?>" alt="Pet Photo" style="max-width: 100%; height: auto;">
-                
+
                 <input type="submit" value="Submit">
             </form>
         </div>
     </div>
 </body>
+
 </html>

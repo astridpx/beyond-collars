@@ -1,5 +1,5 @@
 <nav class="w-full h-[4rem] bg-pale-blue">
-    <div class="container mx-auto flex items-center justify-between ">
+    <div class="w-[85%]  mx-auto flex items-center justify-between ">
         <div class="flex items-center">
             <img src="../img/main_icon.png" alt="logo" height="100" width="100" class=" w-[4rem]">
             <h5 class="font-bold text-xl text-slate-700 ">BEYOND COLLARS</h5>

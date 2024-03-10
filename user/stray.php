@@ -4,74 +4,33 @@
     <?php include '../includes/navbar.php' ?>
 </div>
 
-<style>
-.height{
 
-height: 20vh;
-}
-
-.form{
-
-position: relative;
-}
-
-.form .fa-search{
-
-position: absolute;
-top:20px;
-left: 20px;
-color: #9ca3af;
-
-}
-
-.form span{
-
-    position: absolute;
-right: 17px;
-top: 13px;
-padding: 2px;
-border-left: 1px solid #d1d5db;
-
-}
-
-.left-pan{
-padding-left: 7px;
-}
-
-.left-pan i{
-
-padding-left: 10px;
-}
-
-.form-input{
-
-height: 55px;
-text-indent: 33px;
-border-radius: 10px;
-}
-
-.form-input:focus{
-
-box-shadow: none;
-border:none;
-}
-</style>
-
-
-<!--SEARCH BAR WITH LIVE FILTERING -->
+<!-- SEARCH BAR WITH LIVE FILTERING -->
 <div class="container">
+    
     <div class="row height d-flex justify-content-center align-items-center">
+ 
         <div class="col-md-6">
             <div class="form">
                 <i class="fa fa-search"></i>
                 <input id="searchInput" type="text" class="form-control form-input" placeholder="Search Animal...">
-                <span class="left-pan"><i class="fa fa-microphone"></i></span>
+                <span class="left-pan" id="voiceSearch"><i class="fa fa-microphone"></i></span>
             </div>
         </div>
     </div>
 </div>
 
-<div id="petContainer" class="container">
+<!-- Header -->
+<div class="container">
+    <div class="row">
+        <div class="col text-center">
+            <h2 class="fw-bold text-uppercase mt-4">LIST OF STRAY ANIMALS</h2>
+        </div>
+    </div>
+</div>
+
+
+<div id="petContainer" class="container pet-container"> <!-- Added pet-container class -->
     <div class="row row-cols-1 row-cols-md-4 g-4">
         <?php
         // Connect to your database (replace these variables with your actual database credentials)
@@ -93,55 +52,75 @@ border:none;
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                ?>
-                <div class="col pet-card"> 
-                    <div class="card h-100">
+        ?>
+                <div class="col pet-card">
+                    <div class="card h-100 shadow-md">
                         <img class="card-img-top" src="data:image/jpeg;base64,<?= base64_encode($row["photo"]) ?>" alt="Pet Photo" style="height: 200px; object-fit: cover;">
                         <div class="card-body">
                             <h5 class="card-title"><?= $row["pet_name"] ?></h5>
-                            <p class="card-text"><strong>Sheltered Date:</strong> <?= date('F j, Y', strtotime($row["intake_date"])) ?></p>
-                            <p class="card-text"><strong>Pet Type:</strong> <?= $row["pet_type"] ?></p>
-                            <p class="card-text"><strong>Details:</strong> <?= $row["details"] ?></p>
                         </div>
 
-                        <div class="card-footer d-flex justify-content-between align-items-center">
-                            <button type="button" class="btn btn-outline-primary mr-2" data-bs-toggle="modal" data-bs-target="#petDetailsModal<?= $row["pet_id"] ?>">View Details</button>
+                        <div class="card-footer d-flex justify-content-between align-items-center bg-light">
+                            <button type="button" class="btn btn-secondary btn-sm rounded-pill py-2 px-3 shadow-sm" data-bs-toggle="modal" data-bs-target="#petDetailsModal<?= $row["pet_id"] ?>">View Details</button>
+
                             <form action="/bc/user/owner_report.php" method="post" class="d-inline">
                                 <input type="hidden" name="pet_id" value="<?= $row["pet_id"] ?>">
-                                <button type="submit" class="btn btn-outline-success">I Am the Owner</button>
+                                <button type="submit" class="btn btn-info btn-sm rounded-pill py-2 px-3 shadow-sm bg-cff4fc border-cff4fc">Contact Us</button>
                             </form>
                         </div>
                     </div>
                 </div>
-                <?php
+
+                <!-- Modal -->
+                <div class="modal fade" id="petDetailsModal<?= $row["pet_id"] ?>" tabindex="-1" aria-labelledby="petDetailsModalLabel<?= $row["pet_id"] ?>" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header bg-primary text-white">
+                                <h5 class="modal-title" id="petDetailsModalLabel<?= $row["pet_id"] ?>">Pet Details: <?= $row["pet_name"] ?></h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p><strong>Sheltered Date:</strong> <?= date('F j, Y', strtotime($row["intake_date"])) ?></p>
+                                <p><strong>Pet Type:</strong> <?= $row["pet_type"] ?></p>
+                                <p><strong>Details:</strong> <?= $row["details"] ?></p>
+                                <!-- Additional details can be added here -->
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        <?php
             }
-        } else {
-            echo "0 results";
-        }
+        } 
 
         $conn->close();
         ?>
     </div>
 </div>
 
-
-<!--SCRIPT FOR LIVE FILTERING -->
+<!-- SCRIPT FOR LIVE FILTERING -->
 <script>
+    document.getElementById("searchInput").addEventListener("input", function() {
+        filterPets(this.value.toUpperCase());
+    });
 
+    document.getElementById("voiceSearch").addEventListener("click", function() {
+        startVoiceRecognition();
+    });
 
-    document.getElementById("searchInput").addEventListener("input", function () {
-        var input, filter, container, cards, petNames, i, txtValue;
-        input = this.value.toUpperCase();
-        container = document.getElementById('petContainer');
-        cards = container.getElementsByClassName('pet-card');
+    function filterPets(input) {
+        var container = document.getElementById('petContainer');
+        var cards = container.getElementsByClassName('pet-card');
         var noResultsMessage = document.getElementById("noResultsMessage");
         var hasResults = false;
 
-        for (i = 0; i < cards.length; i++) {
-            petNames = cards[i].getElementsByClassName('card-title')[0];
-            txtValue = petNames.textContent || petNames.innerText;
+        for (var i = 0; i < cards.length; i++) {
+            var petNames = cards[i].getElementsByClassName('card-title')[0];
+            var txtValue = petNames.textContent || petNames.innerText;
             if (txtValue.toUpperCase().indexOf(input) > -1) {
-                cards[i].style.display = ""; 
+                cards[i].style.display = "";
                 hasResults = true;
             } else {
                 cards[i].style.display = "none";
@@ -153,61 +132,37 @@ border:none;
         } else {
             noResultsMessage.style.display = "none";
         }
-    });
+    }
 
+    function startVoiceRecognition() {
+        var recognition = new webkitSpeechRecognition();
+        recognition.continuous = false;
+        recognition.interimResults = false;
 
+        recognition.lang = "en-US";
+        recognition.start();
 
+        recognition.onresult = function(event) {
+            var voiceResult = event.results[0][0].transcript;
+            document.getElementById("searchInput").value = voiceResult;
+            filterPets(voiceResult.toUpperCase());
+            recognition.stop();
+        };
+
+        recognition.onerror = function(event) {
+            console.log('Speech recognition error detected: ' + event.error);
+            recognition.stop();
+        };
+    }
 </script>
-
-
-
 
 <!-- No results found message -->
-<div id="noResultsMessage" class="no-results" style="display: none;">No results found</div>
-
+<div id="noResultsMessage" class="alert alert-info text-center mt-3" role="alert" style="display: none;">
+    No results found.
+ 
 </div>
 
-<?php include 'C:/xampp/htdocs/bc/glbl/footer.php';?>
-
-<script>
-// Retrieve PHP details array and convert it to JavaScript array
-var detailsArray = <?php echo json_encode($details); ?>;
-
-document.getElementById("searchButton").addEventListener("click", function() {
-    var input, filter, container, cards, details, i, txtValue;
-    input = document.getElementById('searchInput');
-    filter = input.value.toUpperCase();
-    container = document.getElementById('petContainer');
-    cards = container.getElementsByClassName('pet-card');
-    var noResultsMessage = document.getElementById("noResultsMessage");
-    var hasResults = false;
-
-    for (i = 0; i < cards.length; i++) {
-        details = detailsArray[i]; // Get the details from the PHP array
-        txtValue = details.toUpperCase();
-        if (txtValue.indexOf(filter) > -1) {
-            cards[i].style.display = ""; // Show the card
-            hasResults = true;
-        } else {
-            cards[i].style.display = "none"; // Hide the card
-        }
-    }
-
-    if (!hasResults) {
-        noResultsMessage.style.display = "block";
-    } else {
-        noResultsMessage.style.display = "none";
-    }
-});
-
-document.getElementById("showAllButton").addEventListener("click", function() {
-    var container = document.getElementById('petContainer');
-    var cards = container.getElementsByClassName('pet-card');
-    for (var i = 0; i < cards.length; i++) {
-        cards[i].style.display = ""; // Show all cards
-    }
-});
-</script>
+<?php include 'C:/xampp/htdocs/bc/glbl/footer.php'; ?>
 
 </body>
 </html>

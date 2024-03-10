@@ -1,0 +1,68 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    color: #ffffff;
+}
+
+.custom-background {
+    background-image: url('/bc/img/BG.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+#intro-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+#intro-text {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#termsCheckboxLabel {
+    margin-bottom: 10px;
+}
+
+#termsCheckboxLabel a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+#termsCheckboxLabel a:hover {
+    text-decoration: underline;
+}
+
+#start-button {
+    margin-top: 10px;
+    padding: 15px 30px;
+    font-size: 18px;
+    background-color: #3498db;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#start-button:hover {
+    background-color: #2980b9;
+}
+
+@media screen and (max-width: 600px) {
+    #start-button {
+        font-size: 16px;
+    }
+}

@@ -1,0 +1,93 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.search-container {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.search-container input[type="text"] {
+    padding: 10px;
+    width: 60%;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.search-container button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: solid white 2px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-container button:hover {
+    background-color: white;
+    color: #333;
+    border: solid #387ADF 2px;
+}
+
+.pet-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.pet-card {
+    background-color: #333;
+    color: white;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    padding: 20px;
+    width: calc((100% - 300px) / 3); /* Calculation for 3 cards in a row */
+    max-width: 350px; /* Maximum width for individual card */
+    text-align: center;
+}
+
+.pet-card img {
+    margin-top: 20px;
+    min-height: 200px;
+    max-width: 300px;
+    border-radius: 5px;
+}
+.pet-card img:hover {
+    transform: scale(1.05);
+}
+
+.pet-card form {
+    margin-top: 10px;
+}
+
+.pet-card form input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #387ADF;
+    color: white;
+    border: solid white 1px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.pet-card form input[type="submit"]:hover {
+    background-color: white;
+    color: #333;
+}
+
+.no-results {
+    text-shadow: 0 0 #333 3px;
+    font-size: 5em;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 140px;
+    padding: 10px;
+    border-radius: 5px;
+    color: White;
+}
+

@@ -1,0 +1,75 @@
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+form {
+    width: 500px;
+    margin: 0 auto;
+    background-color: #333;
+    padding: 50px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: solid white 2px;
+}
+
+h2 {
+    text-align: center;
+    color: #fff;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    color: #fff;
+}
+
+input[type="text"],
+textarea,
+input[type="file"] {
+    background-color: white;
+    color: #333;
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+input[type="submit"] {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 15px;
+    border: 2px solid white;
+    cursor: pointer;
+    font-size: 16px;
+    width: 200px;
+    margin: 14px 150px;
+}
+
+input[type="submit"]:hover {
+    background-color: #2980b9;
+}
+
+
+img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+}
+
+form.p {
+    color: #fff;
+}
+
+#termsCheckboxLabel a {
+    color: #3498db;
+    text-decoration: none;
+}

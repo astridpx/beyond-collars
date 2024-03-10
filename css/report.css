@@ -1,0 +1,86 @@
+.report-container {
+    background-color: white;
+    padding: 20px 40px 40px 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    width: 500px;
+    align-content: end;
+    margin-left:800px; /* Adjust margin as needed */
+}
+
+.img-container {
+    position: fixed;
+    z-index: -1; /* Ensure the image is behind other elements */
+    top: 50%;
+    left: 50%;
+    transform: translate(-100%, -30%);
+    max-width: 40%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+}
+h2 {
+    text-align: center;
+    color: #333;
+}
+label {
+    display: block;
+    margin: 10px 0 5px;
+    color: #333;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="date"],
+textarea,
+input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    color: #333;
+    background-color: white;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #387ADF;
+    border-radius: 4px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+input[type="submit"] {
+    background-color: #387ADF;
+    color: white;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 200px;
+    margin: 14px 150px;
+    border: none;
+}
+
+input[type="submit"]:hover {
+    background-color: #333;
+    color:white;
+}
+
+input[type="file"]a:hover {
+    text-decoration: underline #333;
+}
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    background-color: #387ADF;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    z-index: 1000; /* Ensure the pop-up is above other elements */
+}
+#termsCheckboxLabel a {
+    color: #3498db;
+    text-decoration: none;
+}

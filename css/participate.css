@@ -1,0 +1,108 @@
+.container {
+    display: flex;
+    border-radius: 10px;
+    max-width: 800px; /* Increased max-width */
+    margin: 0 auto; /* Adjusted margin */
+    overflow: hidden; /* Ensure container doesn't expand based on content */
+    background-color: #333;
+    border: solid white 2px;
+}
+
+.event-details {
+    flex: 1;
+    font-size: 1em;
+    padding: 20px 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+#termsCheckboxLabel {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    color: white;
+    font-size: 9px;
+}
+
+.event-details img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-top: 5px;
+}
+
+.event-details h3 {
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.event-details p {
+    color: #fff;
+    margin-bottom: 3px;
+}
+
+form {
+    flex: 1;
+    padding: 20px 40px;
+    margin-left: 20px; /* Added margin between event details and form */
+}
+
+h2 {
+    text-align: center;
+    color: #fff;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    color: white;
+}
+
+input[type="number"],
+input[type="text"],
+input[type="date"],
+textarea,
+input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+input[type="file"] {
+    color: white;
+}
+textarea {
+    resize: vertical;
+}
+
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+#termsCheckboxLabel a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+#termsCheckboxLabel a:hover {
+    text-decoration: underline;
+}
+
+input[type="submit"] {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 15px;
+    border: 2px solid white;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    margin: 14px 0;
+}
+
+input[type="submit"]:hover {
+    background-color: #2980b9;
+}

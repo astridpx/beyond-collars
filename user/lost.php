@@ -11,7 +11,7 @@ $result = $conn->query($category && $category != 'All' ? $sql1 : $sql2);
 
 
 
-// Form submission handling
+// REPORT Form submission handling
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Collect form data
     // Validate and sanitize form data
@@ -32,8 +32,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // }
 
     // Handle file uploads (assuming you have a directory named 'uploads' to store the images)
-    $pet_image_path = "../uploads/" . basename($_FILES['petImg']['name']);
-    $valid_id_image_path = "../uploads/" . basename($_FILES['idImg']['name']);
+    $timestamp = time();
+    $pet_image_path = "../uploads/" . $timestamp . "_" . basename($_FILES['petImg']['name']);
+    $valid_id_image_path = "../uploads/" . $timestamp . "_" . basename($_FILES['idImg']['name']);
 
     $maxFileSize = 5 * 1024 * 1024; // 5MB in bytes
     $fileSize = $image["size"];
@@ -63,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // Attempt to execute the prepared statement
                     if ($stmt->execute()) {
                         // echo "Form submitted successfully!";
-                        header('Location: lost1.php');
+                        header('Location: lost.php');
                         exit();
                     } else {
                         throw new Exception("ERROR: Could not execute query: $sql. " . $stmt->error);
@@ -79,6 +80,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     } catch (Exception $e) {
         echo "Caught exception: " . $e->getMessage();
+    }
+}
+
+
+// I FOUND PET FORM SUBMISSION
+if (isset($_POST['foundPetSubmit'])) {
+    // Get values from the form
+    $pet_id = mysqli_real_escape_string($conn, $_POST['pet_id']);
+    $foundName = mysqli_real_escape_string($conn, $_POST['foundName']);
+    $foundDets = mysqli_real_escape_string($conn, $_POST['foundDets']);
+
+    // Handling file uploads (assuming 'vID' and 'fPetImg' are file inputs)
+    $timestamp = time();
+    $pet_image = "../uploads/found_pet_report/" . $timestamp . "_" . basename($_FILES['vID']['name']);
+    $valid_id_image = "../uploads/found_pet_report/"  . $timestamp . "_"  .  basename($_FILES['fPetImg']['name']);
+
+    // Move uploaded files to the 'uploads' directory.
+    move_uploaded_file($_FILES['vID']['tmp_name'], $valid_id_image);
+    move_uploaded_file($_FILES['fPetImg']['tmp_name'], $pet_image);
+
+    // Insert data into the 'found_pets' table
+    $insert_sql = "INSERT INTO found_pets (pet_id, found_name, found_details, found_img, id_img) VALUES (?, ?, ?, ?, ?)";
+    $stmt = $conn->prepare($insert_sql);
+    // Set the status as 0 (not resolved) when inserting data
+    $status = 0;
+    $stmt->bind_param("issss", $pet_id, $foundName,  $foundDets,  $pet_image, $valid_id_image,);
+
+
+    if ($stmt->execute()) {
+        header('Location: lost.php');
+        exit();
+    } else {
+        echo "Error storing found pet details: " . $stmt->error;
     }
 }
 
@@ -105,6 +139,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="row">
                     <figure class="col-md-6 figure float-start">
                         <img src="../img/a.png" id="MLostPetImg" class="figure-img img-fluid rounded" alt="image">
+                        <figcaption class="figure-caption ">
+                            <button data-bs-toggle="modal" data-bs-target="#FoundPetModal" type="button" class="w-100 btn btn-primary">I Found This Pet</button>
+                        </figcaption>
                     </figure>
                     <article class="col d-flex gap-2 ">
                         <div style="min-width: 6rem; " class="">
@@ -121,13 +158,57 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <h6 id="MLostPetGender" class="">Male</h6>
                             <h6 id="MLostPetReward" class="">$10,000</h6>
                             <h6 id="MLostPetCategory" class="">category</h6>
-                            <h6 id="MLostPetDesc" class="">description</h6>
+                            <h6 id="MLostPetDesc" class="text-wrap">description</h6>
                         </div>
                     </article>
                 </div>
             </div>
 
         </div>
+    </div>
+</div>
+
+<!-- REPORT I FOUND PET MODAL  -->
+<div class="modal fade" id="FoundPetModal" tabindex="-1" aria-labelledby="FoundPetModal" aria-hidden="true">
+    <div class="modal-dialog ">
+        <form class="modal-content" method="POST" enctype="multipart/form-data">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="FoundPetModal">Report Found Pet</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <input type="hidden" class="form-control" id="pet_id" name="pet_id">
+                    <label for="foundName" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="foundName" name="foundName" placeholder="Enter your name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="foundDets" class="form-label">Details</label>
+                    <textarea class="form-control" id="foundDets" rows="3" name="foundDets" placeholder="Enter details here..." required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="vID" class="form-label">Valid ID</label>
+                    <input type="file" accept="image/*" class="form-control" name="vID" id="vID" required>
+                </div>
+                <div class="mb-3">
+                    <label for="fPetImg" class="form-label">Pet Image</label>
+                    <input type="file" accept="image/*" class="form-control" name="fPetImg" id="fPetImg" required>
+                </div>
+                <div class="mb-3">
+                    <div class="form-check ">
+                        <input class="form-check-input" type="checkbox" id="termspolicy" required>
+                        <label class="form-check-label" for="termspolicy">
+                            I have read and agree to the <a href="/bc/glbl/link_to_terms_of_use.html" target="_blank">Terms</a> and <a href="/bc/glbl/link_to_privacy_policy.html" target="_blank">Privacy Policy</a>.
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" name="foundPetSubmit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
     </div>
 </div>
 
@@ -411,6 +492,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             const id = $(this).attr('id').substr(-2);
             const img = $("#lostPetImg-" + id).attr("src")
 
+            $("#pet_id").val(id)
             $("#MLostPetImg").attr("src", img)
             $("#MLostPetName").text($("#lostPetName-" + id).text())
             $("#MLostPetDate").text($("#lostPetDate-" + id).text())

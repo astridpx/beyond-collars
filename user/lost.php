@@ -95,19 +95,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!-- VIEW PET DETAILS Modal -->
 <div class="modal fade" id="PetFoundModal" tabindex="-1" aria-labelledby="PetFoundModal" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="PetFoundModal">Modal title</h1>
+                <h1 class="modal-title fs-5" id="PetFoundModal">Pet Details</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                HAHAHHA
+                <div class="row">
+                    <figure class="col-md-6 figure float-start">
+                        <img src="../img/a.png" class="figure-img img-fluid rounded" alt="image">
+                    </figure>
+                    <article class="col d-flex gap-2 ">
+                        <div style="min-width: 6rem; " class="">
+                            <h6 class="fw-semibold">Name :</h6>
+                            <h6 class="fw-semibold">Last Seen :</h6>
+                            <h6 class="fw-semibold">Gender :</h6>
+                            <h6 class="fw-semibold">Reward :</h6>
+                            <h6 class="fw-semibold">Category :</h6>
+                            <h6 class="fw-semibold">Description :</h6>
+                        </div>
+                        <div class="fw-light text-muted">
+                            <h6 id="MLostPetName" class="">sasasa</h6>
+                            <h6 id="MLostPetDate" class="">sasasa</h6>
+                            <h6 id="MLostPetGender" class="">Male</h6>
+                            <h6 id="MLostPetReward" class="">$10,000</h6>
+                            <h6 id="MLostPetCategory" class="">ssasa</h6>
+                            <h6 id="MLostPetDesc" class="">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat vel, impedit harum ex aut dolor illum culpa rerum possimus eaque sapiente? Deserunt quaerat unde impedit veniam sit consectetur blanditiis sequi enim vero, fuga commodi eaque illum reprehenderit, tempora dolore dicta qui rerum cum velit. Illo a sed alias illum corrupti vel explicabo, praesentium reiciendis aliquid sunt nostrum veritatis suscipit laborum inventore adipisci unde fuga natus aut totam molestias nihil. Sequi laudantium corrupti quia asperiores adipisci eos id deleniti, eaque pariatur! Sunt rerum ea voluptas expedita excepturi repellat molestias sit totam, deserunt architecto in omnis officiis sequi consequatur eum delectus, veniam a explicabo inventore illum velit impedit. Voluptas fugit adipisci saepe consequuntur quibusdam! Ratione, fugit facere iusto obcaecati enim nam, non exercitationem ut, animi cupiditate optio. Dolores sint voluptate dignissimos illo labore maxime, itaque vel libero aliquam molestias amet nostrum necessitatibus dolorum laboriosam voluptatibus illum eligendi placeat tempore. Cum corporis, perferendis id quidem labore neque quae repellat voluptatum esse deserunt sequi quasi, consequatur temporibus inventore iste laboriosam debitis saepe quo maiores accusamus sint mollitia! Natus nobis voluptates quasi nisi doloribus, facilis velit eos ipsa necessitatibus quaerat accusamus voluptatem et modi commodi quod. Soluta accusantium iste, provident aspernatur nam quo temporibus et?</h6>
+                        </div>
+                    </article>
+                </div>
             </div>
-            <!-- <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div> -->
+
         </div>
     </div>
 </div>
@@ -224,7 +243,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             while ($row = $result->fetch_assoc()) {
             ?>
-                <div data-bs-toggle="modal" data-bs-target="#PetFoundModal" class="pet-card border border-1 border-info-subtle rounded-4 overflow-hidden" style="background-color: #ffff">
+                <div data-bs-toggle="modal" data-bs-target="#PetFoundModal" id="pet-det-card-<?php echo $row["pet_id"]; ?>" class="pet-card pet-det-card border border-1 border-info-subtle rounded-4 overflow-hidden" style="background-color: #ffff">
                     <figure class="overflow-hidden">
                         <!-- <img src="<?php echo 'data:image/jpeg;base64,' . base64_encode($row["photo"]); ?>" alt="pet" /> -->
                         <img src="<?php echo  $row["pet_img"]; ?>" alt="pet" />
@@ -240,12 +259,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <h6 class="fw-semibold">Description :</h6>
                         </div>
                         <div class="fw-light text-muted">
-                            <h6 id="lostPetName" class="description-truncate"><?php echo  $row["pet_name"]; ?></h6>
-                            <h6 class="description-truncate"><?php echo  date('F j, Y', strtotime($row["lost_date"])); ?></h6>
-                            <h6 class="description-truncate">Male</h6>
-                            <h6 class="description-truncate">$10,000</h6>
-                            <h6 class="description-truncate"><?php echo $row["pet_type"]; ?></h6>
-                            <h6 id="lostPetDesc" class="description-truncate"><?php echo $row["details"]; ?></h6>
+                            <h6 id="lostPetName-<?php echo $row["pet_id"]; ?>" class="description-truncate"><?php echo  $row["pet_name"]; ?></h6>
+                            <h6 id="lostPetDate-<?php echo $row["pet_id"]; ?>" class="description-truncate"><?php echo  date('F j, Y', strtotime($row["lost_date"])); ?></h6>
+                            <h6 id="lostPetGender-<?php echo $row["pet_id"]; ?>" class="description-truncate">Male</h6>
+                            <h6 id="lostPetReward-<?php echo $row["pet_id"]; ?>" class="description-truncate">$10,000</h6>
+                            <h6 id="lostPetCategory-<?php echo $row["pet_id"]; ?>" class="description-truncate"><?php echo $row["pet_type"]; ?></h6>
+                            <h6 id="lostPetDesc-<?php echo $row["pet_id"]; ?>" class="description-truncate"><?php echo $row["details"]; ?></h6>
                         </div>
                     </article>
                 </div>
@@ -384,4 +403,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 cards[i].style.display = ""; // Show all cards
             }
         });
+    </script>
+
+    <!-- SET THE TEXT CONTENT IN PET DETAILS MODAL -->
+    <script>
+        $(".pet-det-card").on("click", function() {
+            const id = $(this).attr('id').substr(-2);
+
+            $("#MLostPetName").text($("#lostPetName-" + id).text())
+            $("#MLostPetDate").text($("#lostPetDate-" + id).text())
+            $("#MLostPetGender").text($("#lostPetGender-" + id).text())
+            $("#MLostPetReward").text($("#lostPetReward-" + id).text())
+            $("#MLostPetCategory").text($("#lostPetCategory-" + id).text())
+            $("#MLostPetDesc").text($("#lostPetDesc-" + id).text())
+        })
     </script>

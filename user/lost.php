@@ -104,7 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="modal-body">
                 <div class="row">
                     <figure class="col-md-6 figure float-start">
-                        <img src="../img/a.png" class="figure-img img-fluid rounded" alt="image">
+                        <img src="../img/a.png" id="MLostPetImg" class="figure-img img-fluid rounded" alt="image">
                     </figure>
                     <article class="col d-flex gap-2 ">
                         <div style="min-width: 6rem; " class="">
@@ -116,12 +116,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <h6 class="fw-semibold">Description :</h6>
                         </div>
                         <div class="fw-light text-muted">
-                            <h6 id="MLostPetName" class="">sasasa</h6>
-                            <h6 id="MLostPetDate" class="">sasasa</h6>
+                            <h6 id="MLostPetName" class="">name</h6>
+                            <h6 id="MLostPetDate" class="">last seen</h6>
                             <h6 id="MLostPetGender" class="">Male</h6>
                             <h6 id="MLostPetReward" class="">$10,000</h6>
-                            <h6 id="MLostPetCategory" class="">ssasa</h6>
-                            <h6 id="MLostPetDesc" class="">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat vel, impedit harum ex aut dolor illum culpa rerum possimus eaque sapiente? Deserunt quaerat unde impedit veniam sit consectetur blanditiis sequi enim vero, fuga commodi eaque illum reprehenderit, tempora dolore dicta qui rerum cum velit. Illo a sed alias illum corrupti vel explicabo, praesentium reiciendis aliquid sunt nostrum veritatis suscipit laborum inventore adipisci unde fuga natus aut totam molestias nihil. Sequi laudantium corrupti quia asperiores adipisci eos id deleniti, eaque pariatur! Sunt rerum ea voluptas expedita excepturi repellat molestias sit totam, deserunt architecto in omnis officiis sequi consequatur eum delectus, veniam a explicabo inventore illum velit impedit. Voluptas fugit adipisci saepe consequuntur quibusdam! Ratione, fugit facere iusto obcaecati enim nam, non exercitationem ut, animi cupiditate optio. Dolores sint voluptate dignissimos illo labore maxime, itaque vel libero aliquam molestias amet nostrum necessitatibus dolorum laboriosam voluptatibus illum eligendi placeat tempore. Cum corporis, perferendis id quidem labore neque quae repellat voluptatum esse deserunt sequi quasi, consequatur temporibus inventore iste laboriosam debitis saepe quo maiores accusamus sint mollitia! Natus nobis voluptates quasi nisi doloribus, facilis velit eos ipsa necessitatibus quaerat accusamus voluptatem et modi commodi quod. Soluta accusantium iste, provident aspernatur nam quo temporibus et?</h6>
+                            <h6 id="MLostPetCategory" class="">category</h6>
+                            <h6 id="MLostPetDesc" class="">description</h6>
                         </div>
                     </article>
                 </div>
@@ -246,7 +246,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div data-bs-toggle="modal" data-bs-target="#PetFoundModal" id="pet-det-card-<?php echo $row["pet_id"]; ?>" class="pet-card pet-det-card border border-1 border-info-subtle rounded-4 overflow-hidden" style="background-color: #ffff">
                     <figure class="overflow-hidden">
                         <!-- <img src="<?php echo 'data:image/jpeg;base64,' . base64_encode($row["photo"]); ?>" alt="pet" /> -->
-                        <img src="<?php echo  $row["pet_img"]; ?>" alt="pet" />
+                        <img src="<?php echo  $row["pet_img"]; ?>" id="lostPetImg-<?php echo $row["pet_id"]; ?>" alt="pet" />
                     </figure>
 
                     <article class="d-flex gap-2 px-2 pt-1 pb-4">
@@ -409,7 +409,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script>
         $(".pet-det-card").on("click", function() {
             const id = $(this).attr('id').substr(-2);
+            const img = $("#lostPetImg-" + id).attr("src")
 
+            $("#MLostPetImg").attr("src", img)
             $("#MLostPetName").text($("#lostPetName-" + id).text())
             $("#MLostPetDate").text($("#lostPetDate-" + id).text())
             $("#MLostPetGender").text($("#lostPetGender-" + id).text())

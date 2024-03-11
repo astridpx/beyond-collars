@@ -8,7 +8,8 @@
     <title>Release Request Form</title>
 </head>
 <body style="background-image: url('/bc/img/smoke.png');">
-    <?php include 'C:/xampp/htdocs/bc/glbl/navbar.php'; ?>
+
+    <?php //include 'C:/xampp/htdocs/bc/glbl/navbar.php'; ?>
 
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['pet_id'])) {

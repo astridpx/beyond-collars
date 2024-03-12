@@ -204,3 +204,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['pet_id'])) {
 <!-- Include Bootstrap and jQuery JavaScript files -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+<?php include '../includes/main-wrapper-close.php' ?>
+
+
+<?php include '../includes/footer.php'; ?>
+

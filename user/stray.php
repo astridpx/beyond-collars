@@ -9,7 +9,6 @@
 
 
 
-
 <!-- SEARCH BAR WITH LIVE FILTERING -->
 <div class="container">
     
@@ -37,19 +36,7 @@
     
     <div class="row row-cols-1 row-cols-md-3 g-5">
         <?php
-        // Connect to your database (replace these variables with your actual database credentials)
-        $servername = "localhost";
-        $username = "root";
-        $password = ""; // No password for root user
-        $dbname = "bcdb";
-
-        $conn = new mysqli($servername, $username, $password, $dbname);
-
-        // Check the connection
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-
+ 
         // Pagination variables
         $results_per_page = 3; // Number of results per page
         if (!isset($_GET['page'])) {
@@ -71,8 +58,8 @@
             <div class="card border-0 shadow rounded">
                 <div class="card-img-top rounded-top" style="background-image: url(data:image/jpeg;base64,<?= base64_encode($row["photo"]) ?>); height: 200px; background-size: cover; background-position: center;"></div>
                 <div class="card-body">
-                    <h3 class="card-title text-center"><?= $row["pet_name"] ?></h3>
-                    <h6 class="card-title text-center"><?= $row["intake_date"] ?></h6>
+                    <h5 class="card-title text-center"><?= $row["pet_name"] ?></h5>
+                       <h5 class="card-title text-center"><?= $row["intake_date"] ?></h5>
                 </div>
                 
                 <div class="card-footer bg-light d-flex justify-content-center align-items-center rounded-bottom pb-3">
@@ -213,23 +200,7 @@
     }
 </style>
 
-<!-- JavaScript for pagination -->
-<script>
-    function nextPage() {
-        var currentPage = <?php echo $page; ?>;
-        var totalPages = <?php echo $total_pages; ?>;
-        if (currentPage < totalPages) {
-            window.location.href = "?page=" + (currentPage + 1);
-        }
-    }
 
-    function prevPage() {
-        var currentPage = <?php echo $page; ?>;
-        if (currentPage > 1) {
-            window.location.href = "?page=" + (currentPage - 1);
-        }
-    }
-</script>
 
     <?php
     $conn->close();
@@ -315,6 +286,25 @@
             recognition.stop();
         };
     }
+
+
+    // JavaScript for pagination 
+
+    function nextPage() {
+        var currentPage = <?php echo $page; ?>;
+        var totalPages = <?php echo $total_pages; ?>;
+        if (currentPage < totalPages) {
+            window.location.href = "?page=" + (currentPage + 1);
+        }
+    }
+
+    function prevPage() {
+        var currentPage = <?php echo $page; ?>;
+        if (currentPage > 1) {
+            window.location.href = "?page=" + (currentPage - 1);
+        }
+    }
+
 </script>
 
 <!-- No results found message -->
@@ -325,7 +315,4 @@
 
 
 <?php include '../includes/main-wrapper-close.php' ?>
-
-
-<?php include '../includes/footer.php'; ?>
-
+<?php include '../includes/footer.php' ?>

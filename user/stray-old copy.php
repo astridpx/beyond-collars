@@ -1,65 +1,8 @@
 <?php include '../includes/main-wrapper.php' ?>
 
-<?php include '../config/conn.php' ?>
-
-
-
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['pet_id'])) {
-    if (
-        isset($_POST['requester_name']) && isset($_POST['requester_contact']) && isset($_POST['release_reason']) &&
-        isset($_FILES['valid_id_photo']['tmp_name']) && isset($_FILES['past_photo']['tmp_name'])
-    ) {
-
-        $pet_id = $_POST['pet_id'];
-        $requester_name = $_POST['requester_name'];
-        $requester_contact = $_POST['requester_contact'];
-        $release_reason = $_POST['release_reason'];
-
-        // Check if the pet_id exists in sheltered_pets table
-        $check_pet_id_sql = "SELECT pet_id FROM sheltered_pets WHERE pet_id = ?";
-        $check_stmt = $conn->prepare($check_pet_id_sql);
-        $check_stmt->bind_param("i", $pet_id);
-        $check_stmt->execute();
-        $check_stmt->store_result();
-
-        if ($check_stmt->num_rows > 0) {
-            // Prepare and execute the query to insert release request
-            $sql = "INSERT INTO release_requests (pet_id, requester_name, requester_contact, release_reason, valid_id_photo, past_photo) VALUES (?, ?, ?, ?, ?, ?)";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param("isssbb", $pet_id, $requester_name, $requester_contact, $release_reason, $valid_id_photo_data, $past_photo_data);
-
-            // Upload and bind the photo data only if files were uploaded
-            $valid_id_photo_data = isset($_FILES['valid_id_photo']['tmp_name']) ? file_get_contents($_FILES['valid_id_photo']['tmp_name']) : null;
-            $past_photo_data = isset($_FILES['past_photo']['tmp_name']) ? file_get_contents($_FILES['past_photo']['tmp_name']) : null;
-
-            if ($stmt->execute()) {
-                echo "<h2>Release Request Submitted Successfully</h2>";
-                echo "<p>Thank you for your request. It will be processed shortly.</p>";
-            } else {
-                echo "Error submitting release request: " . $stmt->error;
-            }
-
-            $stmt->close();
-        } else {
-            echo "Error: The provided pet ID does not exist.";
-        }
-
-        $check_stmt->close();
-    }
-}
-?>
-
-
-
-
-
-
 <div class="bg-info-subtle">
     <?php include '../includes/navbar.php' ?>
 </div>
-
-
 
 
 <!-- SEARCH BAR WITH LIVE FILTERING -->
@@ -91,7 +34,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['pet_id'])) {
     
 <div class="row row-cols-1 row-cols-md-4 g-5">
         <?php
-    
+        // Connect to your database (replace these variables with your actual database credentials)
+        $servername = "localhost";
+        $username = "root";
+        $password = ""; // No password for root user
+        $dbname = "bcdb";
+
+        $conn = new mysqli($servername, $username, $password, $dbname);
+
+        // Check the connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
 
         // Retrieve data from the sheltered_pets table
         $sql = "SELECT pet_id, pet_name, intake_date, details, photo, pet_type FROM sheltered_pets";
@@ -113,57 +67,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['pet_id'])) {
     <i class="fas fa-info-circle"></i> Details <!-- Icon for Details -->
 </button>
 
-
-
-
-
-<!-- Modal for Release Request Form -->
-<div class="modal fade" id="releaseRequestModal" tabindex="-1" aria-labelledby="releaseRequestModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="releaseRequestModalLabel">Release Request Form</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="" method="post" enctype="multipart/form-data">
-                <div class="modal-body">
-                    <input type="hidden" name="pet_id" id="releasePetId" value="">
-                    <div class="mb-3">
-                        <label for="requester_name" class="form-label">Your Name:</label>
-                        <input type="text" class="form-control" name="requester_name" id="requester_name" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="requester_contact" class="form-label">Your Contact:</label>
-                        <input type="text" class="form-control" name="requester_contact" id="requester_contact" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="release_reason" class="form-label">Reason for Release:</label>
-                        <textarea class="form-control" name="release_reason" id="release_reason" rows="3" required></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="past_photo" class="form-label">Past Photo with Pet:</label>
-                        <input type="file" class="form-control" name="past_photo" id="past_photo" accept="image/jpeg" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="valid_id_photo" class="form-label">Valid ID Photo:</label>
-                        <input type="file" class="form-control" name="valid_id_photo" id="valid_id_photo" accept="image/jpeg" required>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Submit Release Request</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-
-
-<form action="" method="post" class="d-inline">
+<form action="/bc/user/owner_report.php" method="post" class="d-inline">
     <input type="hidden" name="pet_id" value="<?= $row["pet_id"] ?>">
-    <button type="button" class="btn btn-info btn-sm rounded-pill shadow ms-2 px-4" data-bs-toggle="modal" data-bs-target="#releaseRequestModal" data-pet-id="<?= $row["pet_id"] ?>">
-        <i class="fas fa-envelope"></i> Contact
+    <button type="submit" class="btn btn-info btn-sm rounded-pill shadow ms-2 px-4">
+        <i class="fas fa-envelope"></i> Contact <!-- Icon for Contact -->
     </button>
 </form>
 

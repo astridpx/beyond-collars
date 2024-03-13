@@ -1,108 +1,148 @@
 <?php
-// Replace these variables with your own database details
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "bcdb";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+include '../config/conn.php';
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Handle form submission
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Process form data
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Fetching form data
     $name = $_POST['name'];
-    $report_details = $_POST['report_details'];
-    $location = $_POST['location'];
-    $contact_number = $_POST['contact_number'];
+    $address = $_POST['addr'];
+    $contact = $_POST['contact'];
+    $reportDetails = $_POST['report_dets'];
 
-    // Upload photo as BLOB
-    $photo_blob = file_get_contents($_FILES["photo"]["tmp_name"]);
 
-    // Upload valid ID photo as BLOB
-    $valid_id_photo_blob = file_get_contents($_FILES["valid_id_photo"]["tmp_name"]);
+    // Handle file uploads (assuming you have a directory named 'uploads' to store the images)
+    $timestamp = time();
+    $photo_path = "../uploads/report_image/" . $timestamp . "_" . basename($_FILES['photo']['name']);
+    $valid_id_image_path = "../uploads/report_image/" . $timestamp . "_" . basename($_FILES['vId']['name']);
+
+    $maxFileSize = 5 * 1024 * 1024; // 5MB in bytes
+    $fileSize = $image["size"];
+
+    // Move uploaded files to the 'uploads' directory
+    move_uploaded_file($_FILES['photo']['tmp_name'],  $photo_path);
+    move_uploaded_file($_FILES['vId']['tmp_name'], $valid_id_image_path);
 
     // Insert data into database
-    $sql = "INSERT INTO reports (name, report_details, photo_blob, location, contact_number, valid_id_photo_blob) VALUES (?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO reports (name, report_details, location, contact_number, photo, vId) VALUES (?, ?, ?, ?, ?, ?)";
 
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssbssb", $name, $report_details, $photo_blob, $location, $contact_number, $valid_id_photo_blob);
+    $stmt->bind_param("ssssss", $name,  $reportDetails,  $address, $contact,  $photo_path, $valid_id_image_path);
 
     if ($stmt->execute()) {
-        echo "Report submitted successfully";
+        header('Location: report.php');
+        exit();
     } else {
         echo "Error: " . $stmt->error;
     }
-
-    $stmt->close();
 }
-
-$conn->close();
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="/bc/img/main_icon.png">
-    <link rel="stylesheet" href="/bc/css/report.css">
-    <title>Report Form</title>
-</head>
-<body style="background-image: url('/bc/img/smoke.png');">
 
-<img src="/bc/img/cat1.png" alt="Description of the image" class="img-container">
-<?php include 'C:/xampp/htdocs/bc/glbl/navbar.php'; ?>
+<?php include '../includes/main-wrapper.php' ?>
 
-<div class="report-container">
-    <h2>REPORT COMPLAIN</h2>
+<!-- <div class="bg-info-subtle">
+    <?php include '../includes/navbar.php' ?>
+</div> -->
 
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data" class="container">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required><br>
 
-        <label for="report_details">Report Details:</label>
-        <textarea id="report_details" name="report_details" required></textarea><br>
 
-        <label for="location">Location:</label>
-        <input type="text" id="location" name="location" required><br>
+<div style="background-color: #eee; " class="h-100 w-100">
+    <section style="width: 85%; min-height: 100vh;" class="py-2 mx-auto border-2 border">
+        <div class="d-flex  shadow rounded-3 ">
+            <div style="width: 30%; background-color: #545871; color: rgb(241 245 249);" class="overflow-hidden p-3 position-relative rounded-start-3">
+                <div class="d-flex align-items-center mb-3">
+                    <img src="../img/main_icon.png" alt="logo" width="60">
+                    <h5 class="fw-bold ">Beyond Collar</h5>
+                </div>
 
-        <label for="contact_number">Contact Number:</label>
-        <input type="tel" id="contact_number" name="contact_number" required><br>
+                <div class="px-5 py-4 ">
+                    <ul class="timeline  ">
+                        <li class="timeline-item mb-4">
+                            <p class="fw-medium">Owner Profile</p>
+                        </li>
 
-        <label for="photo">Photo:</label>
-        <input type="file" id="photo" name="photo" accept="image/*"><br>
+                        <li class="timeline-item mb-4">
+                            <p class="fw-medium">Pet Basics</p>
+                        </li>
+                        <li class="timeline-item mb-4">
+                            <p class="fw-medium">Pet Details</p>
+                        </li>
+                        <li class="timeline-item mb-4">
+                            <p class="fw-medium">Reunite</p>
+                        </li>
+                    </ul>
+                </div>
 
-        <label for="valid_id_photo">Valid ID Photo:</label>
-        <input type="file" id="valid_id_photo" name="valid_id_photo" accept="image/*"><br>
+                <img src="../img/dog1.png" alt="dog" width="200" style="opacity: 0.5; bottom: -4rem; right: 4rem; " class="position-absolute  ">
+            </div>
 
-        <label id="termsCheckboxLabel" for="termsCheckbox">
-        <input type="checkbox" id="termsCheckbox" name="termsCheckbox" required>
-        I have read and agree to the <a href="/bc/glbl/link_to_terms_of_use.html" target="_blank">Terms</a> and <a href="/bc/glbl/link_to_privacy_policy.html" target="_blank">Privacy Policy</a>.
-        </label>
-        <br>
 
-        <input type="submit" value="Submit">
-    </form>
+            <div style="background-color: white; width: 70%; " class="py-3 px-5  h-100 rounded-end-3">
+                <header style="width: 90%; color: #545871;" class="fs-1 fw-bold mb-5 mx-auto">
+                    Yay, we love dogs! Give us the basics about your pet.
+                </header>
+
+                <form style="width: 90%;" class="row g-2 py-2 mx-auto" method="POST" enctype="multipart/form-data">
+                    <div class="col-md-6">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="vID" class="form-label">Valid ID</label>
+                        <input type="file" accept="image/*" class="form-control" id="vID" name="vId" required>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="address" class="form-label">Address</label>
+                        <input type="text" class="form-control" id="address" name="addr" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="contact" class="form-label">Contact</label>
+                        <input type="text" class="form-control" id="contact" name="contact" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="photo" class="form-label">Photo</label>
+                        <input type="file" accept="image/*" class="form-control" id="photo" name="photo" required>
+                    </div>
+                    <div class="col-12">
+                        <label for="report_dets" class="form-label">Report Details</label>
+                        <textarea class="form-control" id="report_dets" rows="3" name="report_dets" placeholder="Enter details here..." required></textarea>
+                    </div>
+
+                    <div class="pt-1 d-flex justify-content-between">
+                        <a href="/bc/user/" type="button" name="" class="btn btn-outline-danger rounded-5 px-4">Back</a>
+                        <button type="submit" name="" class="btn btn-primary rounded-5 px-4">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
 </div>
+<?php include '../includes/main-wrapper-close.php' ?>
 
-<script>
-        function validateForm() {
-            var checkbox = document.getElementById("termsCheckbox");
-            if (!checkbox.checked) {
-                alert("Please agree to the Terms and Privacy Policy before submitting.");
-                return false;
-            }
-            return true;
-        }
-    </script>
+<style>
+    .timeline {
+        border-left: 1px solid hsl(0, 0%, 90%);
+        position: relative;
+        list-style: none;
+    }
 
-<?php include 'C:/xampp/htdocs/bc/glbl/footer.php';?>
+    .timeline .timeline-item {
+        position: relative;
+    }
 
-</body>
-</html>
+    .timeline .timeline-item:after {
+        position: absolute;
+        display: block;
+        top: 0;
+    }
+
+    .timeline .timeline-item:after {
+        background-color: hsl(0, 0%, 90%);
+        left: -38px;
+        border-radius: 50%;
+        height: 11px;
+        width: 11px;
+        content: "";
+    }
+</style>

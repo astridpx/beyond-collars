@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,29 +12,35 @@
             background-color: #f4f4f4;
             float: left;
         }
+
         .content {
             float: right;
             width: 80%;
             padding: 20px;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
         }
-        th, td {
+
+        th,
+        td {
             padding: 8px;
             text-align: left;
             border-bottom: 1px solid #ddd;
         }
+
         .small-photo {
             max-width: 100px;
             max-height: 100px;
         }
     </style>
 </head>
+
 <body>
     <div class="sidebar">
-        <?php include('C:/xampp/htdocs/bc/glbl/admin_sidebar.php');?>
+        <?php include('C:/xampp/htdocs/bc/glbl/admin_sidebar.php'); ?>
     </div>
     <div class="content">
         <h1>Pending Lost Pets List</h1>
@@ -65,11 +72,11 @@
             }
 
             // Fetch specific fields from the database including pet_type
-            $sql = "SELECT id, owner_name, email, phone, pet_name, pet_type, pet_details, lost_date, valid_id_photo, pet_photo, address FROM add_pet";
+            $sql = "SELECT *  FROM add_pet";
             $result = $conn->query($sql);
 
             if ($result) {
-                while($row = $result->fetch_assoc()) {
+                while ($row = $result->fetch_assoc()) {
                     echo "<tr>
                             <td>" . htmlspecialchars($row["id"]) . "</td>
                             <td>" . htmlspecialchars($row["owner_name"]) . "</td>
@@ -93,4 +100,5 @@
         </table>
     </div>
 </body>
+
 </html>

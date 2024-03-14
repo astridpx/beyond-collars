@@ -63,14 +63,18 @@
                 </div>
                 
                 <div class="card-footer bg-light d-flex justify-content-center align-items-center rounded-bottom pb-3">
-                    <button type="button" class="btn btn-secondary btn-sm rounded-pill shadow me-2 px-4" data-bs-toggle="modal" data-bs-target="#petDetailsModal<?= $row["pet_id"] ?>">
+                  
+                <button type="button" class="btn btn-secondary btn-sm rounded-pill shadow me-2 px-4" data-bs-toggle="modal" data-bs-target="#petDetailsModal<?= $row["pet_id"] ?>">
                         <i class="fas fa-info-circle"></i> Details <!-- Icon for Details -->
                     </button>
+
                     <form id="confirmationForm" action="/bc/user/owner_report.php" method="post" class="d-inline">
+
                         <input type="hidden" name="pet_id" value="<?= $row["pet_id"] ?>">
-                        <button type="button" class="btn btn-info btn-sm rounded-pill shadow ms-2 px-4" onclick="showConfirmation()">
-                            <i class="fas fa-envelope"></i> Contact <!-- Icon for Contact -->
+                        <button type="button" class="btn btn-sm rounded-pill shadow ms-2 px-4" style="background-color: #0A1D56; color: white; font-family: 'Arial', sans-serif;" onclick="showConfirmation()">
+                          <i class="fas fa-envelope"></i> Contact <!-- Icon for Contact -->
                         </button>
+
                     </form>
                 </div>
 

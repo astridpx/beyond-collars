@@ -78,128 +78,207 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['pet_id'])) {
     echo "Invalid request";
 }
 ?>
-<div class="container">
-    <div class="row justify-content-between">
-        <div class="col-md-4">
-            <div class="additional-content">
-                <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="../img/cat1.png" alt="First slide" style="width: 100%;">
-                        </div>
-                        <div class="carousel-item">
-                           <img src="../img/cat1.png" alt="First slide" style="width: 100%;">
-                        </div>
+<br>
 
-                        <div class="carousel-item">
-                             <img src="../img/cat1.png" alt="Second slide" style="width: 100%;">
-                        </div>
 
-                        <div class="carousel-item">
-                            <img src="../img/cat1.png" alt="Third slide" style="width: 100%;">
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="formbold-main-wrapper">
+
+  <div class="formbold-form-wrapper">
+    <form action="" method="post" enctype="multipart/form-data" class="found-form">
+      <h2 class="mb-4">Release Request</h2>
+      <input type="hidden" name="pet_id" value="<?php echo htmlspecialchars($_POST['pet_id'] ?? ''); ?>">
+      
+      <div class="formbold-input-flex">
+        <div>
+          <label for="requester_name" class="formbold-form-label"><i class="fas fa-user"></i> Your Name:</label>
+          <input type="text" class="formbold-form-input" name="requester_name" id="requester_name" required>
         </div>
-
-        
-        <div class="col-md-6">
-            <div class="found-form-container">
-                <form action="" method="post" enctype="multipart/form-data" class="found-form">
-                    <h2 class="mb-4">Release Request Form</h2>
-                    <input type="hidden" name="pet_id" value="<?php echo htmlspecialchars($_POST['pet_id'] ?? ''); ?>">
-                    <div class="form-group">
-                        <label for="requester_name"><i class="fas fa-user"></i> Your Name:</label>
-                        <input type="text" class="form-control" name="requester_name" id="requester_name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="requester_contact"><i class="fas fa-phone"></i> Your Contact:</label>
-                        <input type="text" class="form-control" name="requester_contact" id="requester_contact" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="release_reason"><i class="fas fa-info-circle"></i> Reason for Release:</label>
-                        <textarea class="form-control" name="release_reason" id="release_reason" rows="4" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="past_photo"><i class="fas fa-image"></i> Past Photo with Pet:</label>
-                        <input type="file" class="form-control-file" name="past_photo" id="past_photo" accept="image/jpeg" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="valid_id_photo"><i class="fas fa-id-card"></i> Valid ID Photo:</label>
-                        <input type="file" class="form-control-file" name="valid_id_photo" id="valid_id_photo" accept="image/jpeg" required>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Submit Release Request</button>
-                    </div>
-                </form>
-            </div>
+        <div>
+          <label for="requester_contact" class="formbold-form-label"><i class="fas fa-phone"></i> Your Contact:</label>
+          <input type="text" class="formbold-form-input" name="requester_contact" id="requester_contact" required>
         </div>
-    </div>
+      </div>
+      
+      <div>
+        <label for="release_reason" class="formbold-form-label"><i class="fas fa-info-circle"></i> Reason for Release:</label>
+        <textarea class="formbold-form-input" name="release_reason" id="release_reason" rows="4" required></textarea>
+      </div>
+      
+      <div class="formbold-input-flex">
+        <div>
+          <label for="past_photo" class="formbold-form-label"><i class="fas fa-image"></i> Past Photo with Pet:</label>
+          <input type="file" class="formbold-form-input" name="past_photo" id="past_photo" accept="image/jpeg" required>
+        </div>
+        <div>
+          <label for="valid_id_photo" class="formbold-form-label"><i class="fas fa-id-card"></i> Valid ID Photo:</label>
+          <input type="file" class="formbold-form-input" name="valid_id_photo" id="valid_id_photo" accept="image/jpeg" required>
+        </div>
+      </div>
+      
+      <button type="submit" class="formbold-btn"><i class="fas fa-paper-plane"></i> Submit Release Request</button>
+    </form>
+  </div>
 </div>
 
-<script>
-    $('.carousel').carousel({
-        interval: 2000 // Change slide every 2 seconds
-    });
-</script>
-
 <style>
-/* Custom Styles */
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: "Inter", sans-serif;
+  }
+  .formbold-main-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px;
+  }
 
-.additional-content {
-    text-align: center;
-}
-
-/* Advanced CSS */
-
-.found-form-container {
-    background-color: #f0f0f0;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.found-form {
-    margin-top: 20px;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    font-weight: bold;
-}
-
-.form-control {
+  .formbold-form-wrapper {
+    margin: 0 auto;
+    max-width: 550px;
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    transition: border-color 0.3s ease;
-}
+    background: white;
+  }
 
-.form-control:focus {
-    outline: none;
-    border-color: #007bff;
-}
+  .formbold-input-flex {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 15px;
+  }
+  .formbold-input-flex > div {
+    width: 50%;
+  }
 
-.btn-primary {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
+  .formbold-input-radio-wrapper {
+    margin-bottom: 28px;
+  }
+  .formbold-radio-flex {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  .formbold-radio-label {
+    font-size: 14px;
+    line-height: 24px;
+    color: #07074D;
+    position: relative;
+    padding-left: 25px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  .formbold-input-radio {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .formbold-radio-checkmark {
+    position: absolute;
+    top: -1px;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    background-color: #FFFFFF;
+    border: 1px solid #DDE3EC;
+    border-radius: 50%;
+  }
+  .formbold-radio-label .formbold-input-radio:checked ~ .formbold-radio-checkmark {
+    background-color: #6A64F1;
+  }
+  .formbold-radio-checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+
+  .formbold-radio-label .formbold-input-radio:checked ~ .formbold-radio-checkmark:after {
+    display: block;
+  }
+
+  .formbold-radio-label .formbold-radio-checkmark:after {
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    transform: translate(-50%, -50%);
+  }
+
+  .formbold-form-input {
+    width: 100%;
+    padding: 13px 22px;
+    border-radius: 5px;
+    border: 1px solid #DDE3EC;
+    background: #FFFFFF;
+    font-weight: 500;
+    font-size: 16px;
+    color: #07074D;
+    outline: none;
+    resize: none;
+  }
+  .formbold-form-input::placeholder {
+    color: #536387;
+  }
+  .formbold-form-input:focus {
+    border-color: #6a64f1;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+  }
+  .formbold-form-label {
+    color: #07074D;
+    font-size: 14px;
+    line-height: 24px;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .formbold-btn {
+    text-align: center;
+    width: 100%;
+    font-size: 16px;
+    border-radius: 5px;
+    padding: 14px 25px;
+    border: none;
+    font-weight: 500;
+    background-color: #6A64F1;
+    color: white;
+    cursor: pointer;
+    margin-top: 25px;
+  }
+  .formbold-btn:hover {
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+  }
+  .formbold-main-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px; /* Adjusted padding */
+  max-width: 100%; /* Adjusted max-width */
+  height: 100vh; /* Set height to occupy full viewport */
+  background-color: #f9f9f9; /* Added background color */
 }
 
-.btn-primary:hover {
-    background-color: #0056b3;
+.formbold-form-wrapper {
+  margin: 0 auto;
+  max-width: 550px;
+  width: 100%;
+  background: white;
+  border-radius: 10px; /* Added border radius */
+  padding: 30px; /* Added padding */
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1); /* Added shadow */
 }
+
+/* Rest of your existing CSS styles remain unchanged */
+
 </style>
+
+
 
 <!-- Include Bootstrap and jQuery JavaScript files -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

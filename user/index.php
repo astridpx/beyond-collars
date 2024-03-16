@@ -41,7 +41,7 @@ $result = $conn->query($sql);
     </h5>
 
     <div style="height: 27rem;" class="">
-        <swiper-container class="mySwiper  h-100" pagination="true" pagination-clickable="false" navigation="true" slides-per-view="2" space-between="30" centered-slides="false">
+        <swiper-container class="mySwiper  h-100" pagination="true" pagination-clickable="true" navigation="true" slides-per-view="2" space-between="30" centered-slides="false">
 
             <?php
             while ($row = $result->fetch_assoc()) {

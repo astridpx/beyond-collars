@@ -1,3 +1,5 @@
+
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 <style>
@@ -36,13 +38,13 @@
     }
 </style>
 
-<footer>
-    <div class="footer-info">
-        <p>Follow us on Facebook: <a href="https://web.facebook.com/profile.php?id=61556976593672&_rdc=2&_rdr" target="_blank"><i class="fab fa-facebook-square icon"></i>Beyond Collars</a></p>
-        <p>Email: <a href="mailto:beyondcollarspetservice@gmail.com" target="_blank"><i class="far fa-envelope icon"></i>beyondcollarspetservice@gmail.com</a></p>
-        <p>Contact us:
-            <i class="fas fa-mobile-alt icon"></i>Smart: 09306063731
-            <i class="fas fa-mobile-alt icon"></i>Globe: 09458160923
-        </p>
-    </div>
-</footer>
+    <footer>
+        <div class="footer-info">
+            <p>Follow us on Facebook: <a href="https://web.facebook.com/profile.php?id=61556976593672&_rdc=2&_rdr" target="_blank"><i class="fab fa-facebook-square icon"></i>Beyond Collars</a></p>
+            <p>Email: <a href="mailto:beyondcollarspetservice@gmail.com" target="_blank"><i class="far fa-envelope icon"></i>beyondcollarspetservice@gmail.com</a></p>
+            <p>Contact us:
+                <i class="fas fa-mobile-alt icon"></i>Smart: 09306063731
+                <i class="fas fa-mobile-alt icon"></i>Globe: 09458160923
+            </p>
+        </div>
+    </footer>

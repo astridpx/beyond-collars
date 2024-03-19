@@ -18,6 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pet_details = $_POST['pet_details'];
     $address = $_POST['address'];
     $pet_type = $_POST['pet_type'];
+    $breed_type = $_POST['breed_type'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
 
@@ -39,11 +40,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Prepare SQL statement
  // Prepare SQL statement
-$sql = "INSERT INTO stray_pets (intake_date, finder_name, pet_name, pet_details, pet_photo, address, pet_type, email, phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$sql = "INSERT INTO stray_pets (intake_date, finder_name, pet_name, pet_details, pet_photo, address, pet_type, breed_type, email, phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 if ($stmt = $conn->prepare($sql)) {
     // Bind parameters
-    $stmt->bind_param("sssssssss", $intake_date, $finder_name, $pet_name, $pet_details, $pet_photo_path, $address, $pet_type, $email, $phone);
+    $stmt->bind_param("ssssssssss", $intake_date, $finder_name, $pet_name, $pet_details, $pet_photo_path, $address, $pet_type, $breed_type, $email, $phone);
 
     if ($stmt->execute()) {
         echo '<script>
@@ -251,7 +252,7 @@ echo " ";
 
 <div id="breed_dropdown" style="display: none;">
     <label for="breed" class="formbold-form-label"> Breed </label>
-    <select id="breed" class="formbold-form-input">
+    <select id="breed" class="formbold-form-input" name="breed_type" >
         <option value="">Select Breed</option>
     </select>
 </div>

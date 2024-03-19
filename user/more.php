@@ -1,12 +1,6 @@
 <?php include '../includes/main-wrapper.php' ?>
 <?php include '../config/conn.php' ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Title</title>
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../path/to/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -18,7 +12,7 @@
 
         /* Style for background */
         .bg-info-subtle {
-            background-color: #f0f0f0;
+            background-color: #16a34a;
             padding: 10px;
         }
 
@@ -47,7 +41,7 @@
 
         /* Style for visit button */
         .visit-button {
-            background-color: #007bff;
+            background-color: #16a34a;
             color: #fff;
             border: none;
             padding: 5px 10px;
@@ -72,30 +66,28 @@
 
 
     </style>
-</head>
-<body>
 
 
-<div class="bg-info-subtle">
     <?php include '../includes/navbar.php' ?>
-</div>
 
 
 
+<br>
+<br>
 <div class="flex justify-center items-center">
     <nav id="category-navbar" class="flex justify-center mb-8">
         <ul class="flex space-x-4">
             <li>
-                <a href="#" class="button-category bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full" data-category="veterinary">Veterinary Care</a>
+                <a href="#" class="button-category text-white px-4 py-2 rounded-full" data-category="veterinary" style="background-color: #16a34a;">Veterinary Care</a>
             </li>
             <li>
-                <a href="#" class="button-category bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full" data-category="grooming">Pet Grooming</a>
+                <a href="#" class="button-category text-white px-4 py-2 rounded-full" data-category="grooming" style="background-color: #16a34a;">Pet Grooming</a>
             </li>
             <li>
-                <a href="#" class="button-category bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full" data-category="boarding">Pet Boarding and Daycare</a>
+                <a href="#" class="button-category text-white px-4 py-2 rounded-full" data-category="boarding" style="background-color: #16a34a;">Pet Boarding and Daycare</a>
             </li>
             <li>
-                <a href="#" class="button-category bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full" data-category="training">Pet Training</a>
+                <a href="#" class="button-category text-white px-4 py-2 rounded-full" data-category="training" style="background-color: #16a34a;">Pet Training</a>
             </li>
         </ul>
     </nav>
@@ -184,5 +176,3 @@
 
     <?php include '../includes/main-wrapper-close.php' ?>
     <?php include '../includes/footer.php'; ?>
-</body>
-</html>

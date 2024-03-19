@@ -75,8 +75,8 @@
                     <form id="confirmationForm" action="/bc/user/owner_report.php" method="post" class="d-inline">
 
                         <input type="hidden" name="pet_id" value="<?= $row["pet_id"] ?>">
-                        <button type="button" class="btn btn-sm rounded-pill shadow ms-2 px-4" style="background-color: #0A1D56; color: white; font-family: 'Arial', sans-serif;" onclick="showConfirmation()">
-                          <i class="fas fa-envelope"></i> Contact <!-- Icon for Contact -->
+                        <button type="button" class="btn btn-sm rounded-pill shadow ms-3 px-4" style="background-color: #16a34a; color: white; font-family: 'Arial', sans-serif;" onclick="showConfirmation()">
+                          <i class="fas fa-envelope"></i> I found this pet! <!-- Icon for Contact -->
                         </button>
 
                     </form>
@@ -227,7 +227,7 @@
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: " #000080",
+      confirmButtonColor: " #16a34a",
       cancelButtonColor: "dark",
       confirmButtonText: "Yes, I am!",
     }).then((result) => {

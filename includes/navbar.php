@@ -20,6 +20,11 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link" style="color: white;" href="/bc/user/more.php">More</a>
+                </li>
+
+
+                <li class="nav-item">
                     <a class="nav-link" style="color: white;" href="/bc/user/stray.php">Stray</a>
                 </li>
                 <li class="nav-item dropdown">

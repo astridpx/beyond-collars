@@ -1,10 +1,14 @@
 <?php include '../includes/main-wrapper.php' ?>
 
-<?php include '../config/conn.php' ?>
-
 <div class="bg-info-subtle">
     <?php include '../includes/navbar.php' ?>
 </div>
+
+
+
+<?php include '../config/conn.php' ?>
+
+
 
 
 
@@ -319,4 +323,5 @@
 
 
 <?php include '../includes/main-wrapper-close.php' ?>
+
 <?php include '../includes/footer.php' ?>

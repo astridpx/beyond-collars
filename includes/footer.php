@@ -2,15 +2,16 @@
     <br>
     <br>
     <br>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
     <!-- Widgets - Bootstrap Brain Component -->
-    <section class="py-4 py-md-5 py-xl-8 border-top border-light" style="background-color: #0A1D56; color: #f8f9fa;">
+    <section class="py-2 py-md-2 py-xl-4 border-top borde text-white" style="background-color: #065f46;"> 
         <div class="container overflow-hidden">
             <div class="row gy-4 gy-lg-0 justify-content-xl-between">
                 <div class="col-12 col-md-4 col-lg-3 col-xl-2">
                     
                     <!-- Google Maps Embed -->
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5454.608270150451!2d121.12447570541187!3d14.211515815364896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd630741c3417d%3A0x12403ca1bc9f4a3d!2sMayapa%2C%20Calamba%2C%204027%20Laguna!5e1!3m2!1sen!2sph!4v1710235734033!5m2!1sen!2sph" width="240" height="240" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5454.608270150451!2d121.12447570541187!3d14.211515815364896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd630741c3417d%3A0x12403ca1bc9f4a3d!2sMayapa%2C%20Calamba%2C%204027%20Laguna!5e1!3m2!1sen!2sph!4v1710235734033!5m2!1sen!2sph" width="200" height="200" style="border: 10;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
                 <div class="col-12 col-md-4 col-lg-3 col-xl-2">
                     <div class="widget">
@@ -24,28 +25,35 @@
                         </p>
                     </div>
                 </div>
+             
                 <div class="col-12 col-md-4 col-lg-3 col-xl-2">
-                    <div class="widget">
-                        <h4 class="widget-title mb-4">Learn More</h4>
-                        <ul class="list-unstyled">
-                            <li class="mb-2">
-                                <a href="#!" class="link-secondary text-decoration-none" style="color: #f8f9fa;">About</a>
-                            </li>
-                            <li class="mb-2">
-                                <a href="#!" class="link-secondary text-decoration-none" style="color: #f8f9fa;">Contact</a>
-                            </li>
-                            <li class="mb-2">
-                                <a href="#!" class="link-secondary text-decoration-none" style="color: #f8f9fa;">Advertise</a>
-                            </li>
-                            <li class="mb-2">
-                                <a href="#!" class="link-secondary text-decoration-none" style="color: #f8f9fa;">Terms of Service</a>
-                            </li>
-                            <li class="mb-0">
-                                <a href="#!" class="link-secondary text-decoration-none" style="color: #f8f9fa;">Privacy Policy</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+    <div class="widget">
+        <h4 class="widget-title mb-4">Social Media</h4>
+        <ul class="list-unstyled social-icons">
+            <li class="mb-4">
+                <a href="#!" class="link-secondary text-decoration-none d-inline-block mr-3" style="color: #f8f9fa; margin-right: 10px;">
+                    <i class="fab fa-facebook-f"></i> 
+                </a>
+
+                <a href="#!" class="link-secondary text-decoration-none d-inline-block mr-3"style="color: #f8f9fa; margin-right: 10px;">
+                    <i class="fab fa-youtube"></i> 
+                </a>
+
+                <a href="#!" class="link-secondary text-decoration-none d-inline-block" style="color: #f8f9fa; margin-right: 10px;">
+                    <i class="fab fa-instagram"></i> 
+                </a>
+            </li>
+          
+            <li class="mb-2">
+                <a href="#!" class="link-secondary text-decoration-none" style="color: #f8f9fa;">Terms of Service</a>
+            </li>
+            <li class="mb-0">
+                <a href="#!" class="link-secondary text-decoration-none" style="color: #f8f9fa;">Privacy Policy</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
                 <div class="col-12 col-lg-3 col-xl-4">
                     <div class="widget">
                         <h4 class="widget-title mb-4">System Email</h4>
@@ -64,7 +72,8 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="d-grid">
-                                        <button class="btn btn-primary" type="submit">Submit Your Email</button>
+                                       <button class="btn btn-primary bg-orange-500 text-white" type="submit">Submit Your Email</button>
+
                                     </div>
                                 </div>
                             </div>
@@ -74,4 +83,19 @@
             </div>
         </div>
     </section>
+
+
+  <!--COPY RIGHT ICON AND TITLE -->
+<section class="py-2 py-md-2 py-xl-4 border-top bg-green-800 text-white" style="background-color: #065f46;"> 
+    <div class="container">
+        <div class="flex justify-center items-center">
+            <span class="mr-2">
+                <i class="fas fa-gavel"></i>
+            </span>
+            <p class="text-md">Copyright &copy; "SAMPLE TEXT "</p>
+        </div>
+    </div>
+</section>
+
+
 </footer>

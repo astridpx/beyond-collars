@@ -222,6 +222,8 @@ if (isset($_POST['foundPetSubmit'])) {
             </div>
             <div class="modal-body">
                 <div class="row g-3">
+                    <h6 style="color: rgb(5 46 22);" class="mb-0 ">**Person Details**</h6>
+
                     <div class="col-12">
                         <label for="ownername" class="form-label ">*Name</label>
                         <input type="text" class="form-control" id="ownername" name="ownerName" placeholder="*Your name" required>
@@ -238,6 +240,9 @@ if (isset($_POST['foundPetSubmit'])) {
                         <label for="address" class="form-label">Address</label>
                         <input type="text" class="form-control" id="address" name="address" placeholder="*Your address" required>
                     </div>
+
+                    <h6 style="color: rgb(5 46 22);" class="pt-3 pb-2 ">**Pet Details**</h6>
+
                     <div class="col-md-4 mb-2">
                         <label for="petname" class="form-label">*Pet Name</label>
                         <input type="text" class="form-control" id="petname" name="petName" required placeholder="*Your pet name">

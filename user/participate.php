@@ -64,6 +64,7 @@ $mysqli->close();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -71,6 +72,7 @@ $mysqli->close();
     <link rel="stylesheet" href="/bc/css/participate.css">
     <title>Participate Form</title>
 </head>
+
 <body style="background-image: url('/bc/img/smoke.png');">
     <?php include 'C:/xampp/htdocs/bc/glbl/navbar.php'; ?>
 
@@ -112,8 +114,8 @@ $mysqli->close();
 
             <!-- Terms and Policy -->
             <label id="termsCheckboxLabel" for="termsCheckbox">
-            <input type="checkbox" id="termsCheckbox" name="termsCheckbox" required>
-            I have read and agree to the <a href="/bc/glbl/link_to_terms_of_use.html" target="_blank">Terms</a> and <a href="/bc/glbl/link_to_privacy_policy.html" target="_blank">Privacy Policy</a>.
+                <input type="checkbox" id="termsCheckbox" name="termsCheckbox" required>
+                I have read and agree to the <a href="/bc/glbl/link_to_terms_of_use.html" target="_blank">Terms</a> and <a href="/bc/glbl/link_to_privacy_policy.html" target="_blank">Privacy Policy</a>.
             </label>
 
             <!-- Submit button -->
@@ -133,6 +135,7 @@ $mysqli->close();
         }
     </script>
 
-    <?php include 'C:/xampp/htdocs/bc/glbl/footer.php';?>
+    <?php include 'C:/xampp/htdocs/bc/glbl/footer.php'; ?>
 </body>
+
 </html>

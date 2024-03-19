@@ -1,87 +1,86 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="/bc/img/main_icon.png">
-    <link rel="stylesheet" href="/bc/css/event.css">
-    <title>Event</title>
-</head>
-<body style="background-image: url('/bc/img/smoke.png');">
+<?php
+include '../config/conn.php';
 
-<?php include 'C:/xampp/htdocs/bc/glbl/navbar.php';?>
 
-<div class="slideshow-container">
-    <?php
-    // Replace these variables with your actual MySQL database credentials
-    $host = "localhost";
-    $username = "root";
-    $password = "";
-    $database = "bcdb";
+$isEvent = isset($_GET["event"]);
+$event_id = isset($_GET["event"]) ? $_GET["event"] : null;
 
-    // Create a MySQL connection
-    $mysqli = new mysqli($host, $username, $password, $database);
+// Query to retrieve data from the 'event' table
+$sql = "SELECT * FROM news_event WHERE id = $event_id";
+$result = $conn->query($sql);
 
-    // Check the connection
-    if ($mysqli->connect_error) {
-        die("Connection failed: " . $mysqli->connect_error);
+$event = null;
+if ($result->num_rows > 0) {
+    // Fetch data row by row
+    while ($row = $result->fetch_assoc()) {
+        // Access data in $row array
+        // print_r($row);
+        $event = $row;
     }
+}
+?>
 
-    // Query to retrieve data from the 'event' table
-    $sql = "SELECT * FROM news_event ORDER BY when_datetime DESC";
-    $result = $mysqli->query($sql);
+<?php include '../includes/main-wrapper.php' ?>
 
-    // Check if there are any rows returned
-    if ($result && $result->num_rows > 0) {
-        // Output data in a continuous format
-        while ($row = $result->fetch_assoc()) {
-            echo '<div class="event-card">';
-            echo '<div class="event-details">';
-            echo '<h3>' . $row['title'] . '</h3>';
-            echo '<p><strong>When:</strong> ' . $row['when_datetime'] . '</p>';
-            echo '<p>' . $row['description'] . '</p>';
-            echo '<form action="participate.php" method="post">';
-            echo '<input type="hidden" name="event_id" value="' . $row['id'] . '">';
-            echo '<button type="submit" class="button-participate">Participate</button>';
-            echo '</form>';
-            echo '</div>';
-            echo '<div class="event-image">';
-            echo '<img src="data:image/jpeg;base64,' . base64_encode($row['picture']) . '" alt="Event Picture" style="width: 100%; height: auto;">';
-            echo '</div>';
-            echo '</div>';
-        }
-    } else {
-        echo "<h1>No Events</h1>";
-    }
-
-    // Close the MySQL connection
-    $mysqli->close();
-    ?>
-    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+<div class="bg-info-subtle">
+    <?php include '../includes/navbar.php' ?>
 </div>
 
-<?php include 'C:/xampp/htdocs/bc/glbl/footer.php';?>
+<section style="background-color: rgb(22 101 52); height:max-content; width: 100%; " class="py-4">
+    <div class="row align-items-center container mx-auto ">
+        <div style=" color:#fff;" class="col-md-7 text-center px-2 text-wrap position-relative">
+            <h2 class="fw-bold">Paws Care
+                <span>
+                    <?php
+                    $datetime = new DateTime($event['when_datetime']);
+                    echo $datetime->format('Y');
+                    ?>
+                </span>
+            </h2>
+            <p style="color: rgb(229 231 235);" class="fw-medium">Join us at Brgy Mayapa Pet Care Event |
+                <span>
+                    <?php
+                    $datetime = new DateTime($event['when_datetime']);
+                    echo $datetime->format('F j Y');
+                    ?>
+                </span>
+            </p>
+        </div>
 
-<script>
-    var slideIndex = 1;
-    showSlides(slideIndex);
+        <div style=" height: 15rem; " class="col">
+            <img src="<?php echo 'data:image/jpeg;base64,' . base64_encode($event['picture']) ?>" style="aspect-ratio: 16/9;" class=" w-100 h-100 rounded-3 " alt="Event Image">
+        </div>
+    </div>
+</section>
+<section style="width: 100%; padding-top: 4rem;" class=" container mx-auto  ">
+    <h2 class="custom-width-md  text-center text-md-start">
+        <?php echo $event['title']; ?>
+    </h2>
 
-    function plusSlides(n) {
-        showSlides(slideIndex += n);
+    <p class="pt-4 text-center text-md-start">
+        <?php echo $event['description']; ?>
+    </p>
+</section>
+
+
+
+
+<?php
+include '../includes/footer.php';
+?>
+
+<?php include '../includes/main-wrapper-close.php' ?>
+
+
+
+<style>
+    .custom-width-md {
+        width: 100%;
     }
 
-    function showSlides(n) {
-        var i;
-        var slides = document.getElementsByClassName("event-card");
-        if (n > slides.length) {slideIndex = 1}
-        if (n < 1) {slideIndex = slides.length}
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
+    @media (min-width: 768px) {
+        .custom-width-md {
+            width: 75%;
         }
-        slides[slideIndex-1].style.display = "flex";
     }
-</script>
-
-</body>
-</html>
+</style>

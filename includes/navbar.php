@@ -4,7 +4,7 @@
         <a class="navbar-brand" href="#">
             <img src="../img/logo.jpg" alt="logo" height="50" width="50" class="rounded-circle">
         </a>
-        <h5 class="fw-bold logo-title" style="color: white;">BRGY.MAYAPA</h5>
+        <h5 class="fw-bold logo-title" style="color: white;">BRGY. MAYAPA</h5>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -27,6 +27,8 @@
                 <li class="nav-item">
                     <a class="nav-link" style="color: white;" href="/bc/user/stray.php">Stray</a>
                 </li>
+
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" style="color: white;" href="#" id="navbarDropdownReport" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">

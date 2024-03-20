@@ -1,20 +1,56 @@
-<nav style="width: 85%; " class="overflow-y-auto mx-auto ">
-    <div class="py-1 container d-flex justify-content-between align-items-center">
-        <div class="d-flex align-items-center">
-            <img src="../img/main_icon.png" alt="logo" height="100" width="100" class=" w-[4rem]">
-            <h5 class="fw-bold logo-title">BEYOND COLLARS</h5>
-        </div>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #065f46;">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="../img/logo.jpg" alt="logo" height="50" width="50" class="rounded-circle">
+        </a>
+        <h5 class="fw-bold logo-title" style="color: white;">BRGY. MAYAPA</h5>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav" style="margin-right: 1rem;">
+  
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" style="color: white;" href="/bc/user">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: white;" href="/bc/user/event.php">Event</a>
+                </li>
 
-        <div class="d-none d-md-flex align-items-center">
-            <a class="px-2 text-decoration-none fs-6 fw-semibold navlink" href="/bc/user">HOME</a>
-            <a class="px-2 text-decoration-none fs-6 fw-semibold navlink" href="/bc/user/event.php">EVENT</a>
-            <a class="px-2 text-decoration-none fs-6 fw-semibold navlink" href="/bc/user/more.php">MORE</a>
-            <a class="px-2 text-decoration-none fs-6 fw-semibold navlink" href="/bc/user/report.php">REPORT</a>
-            <a class="px-2 text-decoration-none fs-6 fw-semibold navlink" href="/bc/user/report_stray.php">REPORT STRAY</a>
-            <a class="px-2 text-decoration-none fs-6 fw-semibold navlink" href="/bc/user/stray.php">STRAY</a>
-            <a class="px-2 text-decoration-none fs-6 fw-semibold navlink" href="/bc/user/found.php">FOUND PET</a>
-            <a class="px-2 text-decoration-none fs-6 fw-semibold navlink" href="/bc/user/lost.php">LOST PET</a>
-        </div>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: white;" href="/bc/user/more.php">More</a>
+                </li>
 
+
+                <li class="nav-item">
+                    <a class="nav-link" style="color: white;" href="/bc/user/stray.php">Stray</a>
+                </li>
+
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" style="color: white;" href="#" id="navbarDropdownReport" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Report
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownReport">
+                        <li><a class="dropdown-item"  href="/bc/user/report.php">Report</a></li>
+                        <li><a class="dropdown-item" href="/bc/user/report_stray.php">Report Stray</a></li>
+                       
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" style="color: white;" href="#" id="navbarDropdownPet" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Pet
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownPet">
+                        <li><a class="dropdown-item" href="/bc/user/found.php">Found Pet</a></li>
+                        <li><a class="dropdown-item"  href="/bc/user/lost.php">Lost Pet</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>

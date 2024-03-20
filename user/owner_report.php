@@ -20,26 +20,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['pet_id'])) {
         $requester_contact = $_POST['requester_contact'];
         $release_reason = $_POST['release_reason'];
 
-        // Connect to your database (replace these variables with your actual database credentials)
-        $servername = "localhost";
-        $username = "root";
-        $password = ""; // No password for root user
-        $dbname = "bcdb";
-
-        $conn = new mysqli($servername, $username, $password, $dbname);
-
-        // Check the connection
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-
         // Prepare and execute the query to insert release request
-        $sql = "INSERT INTO release_requests (pet_id, requester_name, requester_contact, release_reason, valid_id_photo, past_photo) VALUES (?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO release_requests (pet_id, requester_name, requester_contact, release_reason, past_photo) VALUES (?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("isssbb", $pet_id, $requester_name, $requester_contact, $release_reason, $valid_id_photo_data, $past_photo_data);
+        $stmt->bind_param("isssb", $pet_id, $requester_name, $requester_contact, $release_reason, $past_photo_data);
+        
 
         // Upload and bind the photo data only if files were uploaded
-        $valid_id_photo_data = isset($_FILES['valid_id_photo']['tmp_name']) ? file_get_contents($_FILES['valid_id_photo']['tmp_name']) : null;
         $past_photo_data = isset($_FILES['past_photo']['tmp_name']) ? file_get_contents($_FILES['past_photo']['tmp_name']) : null;
 
         if ($stmt->execute()) {
@@ -49,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['pet_id'])) {
                     title: "Success!",
                     text: " Release Request Submitted Successfully!.",
                     icon: "success",
-                    confirmButtonColor: "#3085d6",
+                    confirmButtonColor: "#16a34a",
                     confirmButtonText: "OK",
                     customClass: {
                         container: "custom-sweetalert-container",
@@ -109,10 +96,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['pet_id'])) {
           <label for="past_photo" class="formbold-form-label"><i class="fas fa-image"></i> Past Photo with Pet:</label>
           <input type="file" class="formbold-form-input" name="past_photo" id="past_photo" accept="image/jpeg" required>
         </div>
+        <!--
         <div>
           <label for="valid_id_photo" class="formbold-form-label"><i class="fas fa-id-card"></i> Valid ID Photo:</label>
           <input type="file" class="formbold-form-input" name="valid_id_photo" id="valid_id_photo" accept="image/jpeg" required>
         </div>
+
+        -->
       </div>
       
       <button type="submit" class="formbold-btn"><i class="fas fa-paper-plane"></i> Submit Release Request</button>
@@ -246,7 +236,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['pet_id'])) {
     padding: 14px 25px;
     border: none;
     font-weight: 500;
-    background-color: #6A64F1;
+    background-color: #16a34a;
     color: white;
     cursor: pointer;
     margin-top: 25px;

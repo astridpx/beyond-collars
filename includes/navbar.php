@@ -12,7 +12,7 @@
 
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" style="color: white;" href="#">Home</a>
+                    <a class="nav-link" style="color: white;" href="/bc/user">Home</a>
                 </li>
                 <!-- <li class="nav-item">
                     <a class="nav-link" style="color: white;" href="/bc/user/event.php">Event</a>

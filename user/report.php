@@ -41,7 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php include '../includes/main-wrapper.php' ?>
 
 <!-- <div class="bg-info-subtle">
-    <?php include '../includes/navbar.php' ?>
+    <?php #include '../includes/navbar.php' 
+    ?>
 </div> -->
 
 
@@ -49,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div style="background-color: #eee; " class="h-100 w-100">
     <section style="width: 85%; min-height: 100vh;" class="py-2 mx-auto border-2 border">
         <div class="d-flex  shadow rounded-3 ">
-            <div style="width: 30%; background-color: #545871; color: rgb(241 245 249);" class="overflow-hidden p-3 position-relative rounded-start-3">
+            <div style="width: 30%; background-color: #065f46; color: rgb(241 245 249);" class="overflow-hidden p-3 position-relative rounded-start-3">
                 <div class="d-flex align-items-center mb-3">
                     <img src="../img/main_icon.png" alt="logo" width="60">
                     <h5 class="fw-bold ">Beyond Collar</h5>
@@ -78,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
             <div style="background-color: white; width: 70%; " class="py-3 px-5  h-100 rounded-end-3">
-                <header style="width: 90%; color: #545871;" class="fs-1 fw-bold mb-5 mx-auto">
+                <header style="width: 90%; color: rgb(5 46 22);" class="fs-1 fw-bold mb-5 mx-auto">
                     Yay, we love dogs! Give us the basics about your pet.
                 </header>
 
@@ -111,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     <div class="pt-1 d-flex justify-content-between">
                         <a href="/bc/user/" type="button" name="" class="btn btn-outline-danger rounded-5 px-4">Back</a>
-                        <button type="submit" name="" class="btn btn-primary rounded-5 px-4">Submit</button>
+                        <button type="submit" name="" style="background-color: rgb(21 128 61);" class="btn text-white fw-semibold rounded-5 px-4">Submit</button>
                     </div>
                 </form>
             </div>

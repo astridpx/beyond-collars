@@ -252,7 +252,7 @@ echo " ";
 
 <div id="breed_dropdown" style="display: none;">
     <label for="breed" class="formbold-form-label"> Breed </label>
-    <select id="breed" class="formbold-form-input" name="breed_type" >
+    <select id="breed" class="formbold-form-input" name="breed_type"  >
         <option value="">Select Breed</option>
     </select>
 </div>
